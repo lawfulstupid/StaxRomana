@@ -11,8 +11,6 @@ import Data.Functor ((<&>))
 import AbLib.Data.Tuple
 import GHC.IO
 
-todo = errorWithoutStackTrace "Not yet implemented!"
-
 
 main :: IO ()
 main = getArgs <&> concat >>= compile
@@ -58,18 +56,16 @@ resolve mem = return . ($mem) . \case
    '?' -> direct 2 $ \[x,y]   -> [x,y,x,y]
    '$' -> direct 2 $ \[x,y]   -> [y,x]
    ';' -> direct 3 $ \[x,y,z] -> [z,x,y]
+   ':' -> \case {Empty -> Empty; (s :< a) -> pure a <> s}
    'r' -> fromList . reverse . toList
    {- I/O -}
    '#' -> sideEffect $ (\(x,s) -> print x >> return s) . pop
-   '~' -> sideEffect $ (\xs -> print xs >> return Empty) . toList
+   '~' -> sideEffect $ (\s -> print s >> return Empty) . toList
    '\''-> sideEffect $ (\(x,s) -> putStr [xEnum x] >> return s) . pop
-   '"' -> sideEffect $ (\xs -> putStr xs >> return Empty) . map xEnum . toList
-   ',' -> todo
-   '@' -> todo
-
+   '"' -> sideEffect $ (\s -> putStr s >> return Empty) . map xEnum . toList
+   ',' -> sideEffect $ \s -> flip push s . xEnum <$> getChar
+   '@' -> sideEffect $ \s -> flip pushn s . map xEnum <$> getLine
    where
-   pushR :: Word -> Memory -> Memory
-   pushR = push . Roman
    
    xEnum :: (Enum a, Enum b) => a -> b
    xEnum = toEnum . fromEnum
