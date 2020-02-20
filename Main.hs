@@ -11,6 +11,8 @@ import Data.Functor ((<&>))
 import AbLib.Data.Tuple
 import GHC.IO
 
+todo = errorWithoutStackTrace "Not yet implemented!"
+
 
 main :: IO ()
 main = getArgs <&> concat >>= compile
@@ -20,7 +22,6 @@ compile = run . parse
 
 run :: Program -> IO ()
 run = flip runWithMemory Empty
-
 
 runWithMemory :: Program -> Memory -> IO ()
 runWithMemory prog !mem = do
@@ -59,11 +60,12 @@ resolve mem = return . ($mem) . \case
    ';' -> direct 3 $ \[x,y,z] -> [z,x,y]
    'r' -> fromList . reverse . toList
    {- I/O -}
-   -- '#' -> \mem -> uncurry seq $ (unsafePerformIO . print, id) #$# pop mem
    '#' -> sideEffect $ (\(x,s) -> print x >> return s) . pop
    '~' -> sideEffect $ (\xs -> print xs >> return Empty) . toList
    '\''-> sideEffect $ (\(x,s) -> putStr [xEnum x] >> return s) . pop
    '"' -> sideEffect $ (\xs -> putStr xs >> return Empty) . map xEnum . toList
+   ',' -> todo
+   '@' -> todo
 
    where
    pushR :: Word -> Memory -> Memory
@@ -80,9 +82,6 @@ resolve mem = return . ($mem) . \case
    
    direct :: Int -> ([Roman] -> [Roman]) -> Memory -> Memory
    direct n f = uncurry pushn . mfst f . popn n
-   
-   -- sideEffect :: (Memory -> IO ()) -> (Memory -> Memory) -> Memory -> Memory
-   -- sideEffect action f mem = unsafePerformIO (action mem) `seq` f mem
    
    sideEffect :: (Memory -> IO Memory) -> Memory -> Memory
    sideEffect action = unsafePerformIO . action

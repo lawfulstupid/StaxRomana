@@ -55,12 +55,12 @@ Stack-based roman numeral manipulation language.
 	@	Read line from stdin
 
 ## Control
-	(	If head is zero, jump to after corresponding )
+	(	If condition: If head is zero, jump to after corresponding )
 	)	No effect
-	{	If head is zero, jump to after corresponding }
+	{	While loop: If head is zero, jump to after corresponding }
 	}	Jump to corresponding {
 	[	No effect
-	]	If head is non-zero, jump to corresponding [
+	]	Repeat loop: If head is non-zero, jump to corresponding [
 	
 ## Comments
 	`	Block comment until next backtick.
