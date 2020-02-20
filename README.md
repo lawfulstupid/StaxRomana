@@ -2,7 +2,7 @@
 Stack-based roman numeral manipulation language.
 
 ## Commands
-Write a valid roman numeral to push it to stack.
+The most basic command is pushing a number to the stack. You do this by writing a valid Roman numeral. Please note that Romans numerals cannot be negative.
 ### Arithmetic
 	+	Pop 2, push sum.
 	-	Pop 2, push 2nd-1st (e.g. X I - ~> [9]).
@@ -20,26 +20,28 @@ Write a valid roman numeral to push it to stack.
 	d	Duplicate head.
 	?	Push 2nd, 1st.
 	;	Move head 2 spaces back.
+	:	Move head to bottom of stack.
 	$	Swap top 2 elements.
 	r	Reverse stack.
 	.	Pop 1.
 	_	Clear stack (pop all).
 ### Logic
-	Treats zero as False, non-zero as True, False as zero, True as 1.
+Treats zero as False, non-zero as True.
 	¬	Replace head with inversion.
 	&	Pop 2, push conjunction.
 	|	Pop 2, push disjunction.
 ### Control
+Stack head is treated as 0 when stack is empty.
 	()	If statement: executes once if stack head is non-zero.
 	{}	While loop: executes forever while stack head is non-zero.
 	[]	Repeat loop: executes once, then repeats while stack head is non-zero.
 ### I/O
 	#	Pop 1, print number.
-	~	Pop stack, print as numbers.
-	'	Pop 1, print character.
-	"	Pop stack, print as characters.
-	,	Read char from stdin
-	@	Read line from stdin
+	~	Pop stack and print it.
+	'	Pop 1, print as ASCII character.
+	"	Pop stack, print as ASCII characters.
+	,	Read character from STDIN and push to stack.
+	@	Read line from STDIN and push to stack.
 ### Comments
 	`	Block comment until next backtick.
 
@@ -63,6 +65,7 @@ Write a valid roman numeral to push it to stack.
 	¬(¬...)	If head is zero, do something.
 ### I/O
 	@"	Read & echo
+	I¬r{d':}.r	Print stack without clearing
 ### Miscellaneous
 	?>{.$d;I+$?>}.?!(.)..	Pop 2, push sequence from 1st to 2nd (e.g. VX: ~> [5,6,7,8,9,10])
 ### Hello world
