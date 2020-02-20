@@ -30,12 +30,9 @@ Write a valid roman numeral to push it to stack.
 	&	Pop 2, push conjunction.
 	|	Pop 2, push disjunction.
 ### Control
-	(	If condition: If head is zero, jump to after corresponding )
-	)	No effect
-	{	While loop: If head is zero, jump to after corresponding }
-	}	Jump to corresponding {
-	[	No effect
-	]	Repeat loop: If head is non-zero, jump to corresponding [
+	()	If statement: executes once if stack head is non-zero.
+	{}	While loop: executes forever while stack head is non-zero.
+	[]	Repeat loop: executes once, then repeats while stack head is non-zero.
 ### I/O
 	#	Pop 1, print number.
 	~	Pop stack, print as numbers.
@@ -49,10 +46,10 @@ Write a valid roman numeral to push it to stack.
 ## Examples
 ### Arithmetic
 	I¬	Push 0 to stack.
-	d+		Double head.
+	d+	Double head.
 	dd++	Triple head.
-	d*		Square head.
-	d**		Cube head.
+	d*	Square head.
+	d**	Cube head.
 ### Weak Comparators
 	?=;<|	Pop 2, push 1st<=2nd (e.g. X V ?=;<| ~> [1]).
 	?=;>|	Pop 2, push 1st>=2nd.
@@ -65,7 +62,7 @@ Write a valid roman numeral to push it to stack.
 	?&(...)	If 1st and 2nd, do something.
 	¬(¬...)	If head is zero, do something.
 ### I/O
-	@"		Read & echo
+	@"	Read & echo
 ### Miscellaneous
 	?>{.$d;I+$?>}.?!(.)..	Pop 2, push sequence from 1st to 2nd (e.g. VX: ~> [5,6,7,8,9,10])
 ### Hello world
