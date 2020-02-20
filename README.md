@@ -64,7 +64,7 @@ Stack head is treated as 0 when stack is empty.
 	?&(...)	If 1st and 2nd, do something.
 	¬(¬...)	If head is zero, do something.
 ### I/O
-	@"	Read & echo
+	@"		Read & echo
 	I¬r{d':}.r	Print stack without clearing
 ### Miscellaneous
 	?>{.$d;I+$?>}.?!(.)..	Pop 2, push sequence from 1st to 2nd (e.g. VX: ~> [5,6,7,8,9,10])
