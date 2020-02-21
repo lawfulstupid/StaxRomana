@@ -21,7 +21,7 @@ instance Parse Program where
          '{' -> onFail (just loopWhile)   $ throw $ UnclosedLoop While
          '[' -> onFail (just loopRepeat)  $ throw $ UnclosedLoop Repeat
          c | isRoman c -> onFail (just numeral) throwInvalidNumeral
-           | isSpace c -> nada whitespace
+           | isSpace c -> nada $ greedy whitespace
          _   -> just command
       return $ program $ catMaybes prog
       where
