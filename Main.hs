@@ -1,4 +1,4 @@
-{-# LANGUAGE NoImplicitPrelude, BangPatterns #-}
+{-# LANGUAGE BangPatterns, LambdaCase #-}
 
 module StaxRomana.Main where
 
@@ -7,13 +7,14 @@ import Prelude hiding (head)
 import StaxRomana.Data.Program
 import StaxRomana.Parsers.Program
 import StaxRomana.Data.Memory
+import StaxRomana.Data.Roman
 
 import AbLib.Control.Parser
 import AbLib.Data.Tuple
 
 import System.Environment (getArgs)
 import Data.Functor ((<&>))
-import GHC.IO
+import GHC.IO (unsafePerformIO)
 
 
 main :: IO ()

@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 module StaxRomana.Data.Roman where
 
 import AbLib.Data.Tuple

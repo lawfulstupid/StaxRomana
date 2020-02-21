@@ -1,17 +1,13 @@
-{-# LANGUAGE TypeSynonymInstances #-}
-{-# LANGUAGE FlexibleInstances #-}
-
 module StaxRomana.Data.Program where
 
 import StaxRomana.Data.Memory (Head)
 import StaxRomana.Data.Roman
-import Data.Maybe (catMaybes)
-import Data.Char (isSpace)
 
 
 data Program = Command :> Program | End
 data Command = Pass | Numeral Roman | Command Char | Loop LoopType Program
 data LoopType = If | While | Repeat
+   deriving (Eq, Show)
 
 
 instance Show Program where

@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 module StaxRomana.Parsers.Program where
 
 import StaxRomana.Data.Program
