@@ -3,12 +3,16 @@
 module StaxRomana.Main where
 
 import Prelude hiding (head)
+
 import StaxRomana.Data.Program
+import StaxRomana.Parsers.Program
 import StaxRomana.Data.Memory
+
 import AbLib.Control.Parser
+import AbLib.Data.Tuple
+
 import System.Environment (getArgs)
 import Data.Functor ((<&>))
-import AbLib.Data.Tuple
 import GHC.IO
 
 
