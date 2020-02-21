@@ -8,6 +8,7 @@ import StaxRomana.Data.Program
 import StaxRomana.Parsers.Program
 import StaxRomana.Data.Memory
 import StaxRomana.Data.Roman
+import StaxRomana.Exception.Runtime
 
 import AbLib.Control.Parser
 import AbLib.Data.Tuple
@@ -15,6 +16,7 @@ import AbLib.Data.Tuple
 import System.Environment (getArgs)
 import Data.Functor ((<&>))
 import GHC.IO (unsafePerformIO)
+import Control.Exception (throw)
 
 
 main :: IO ()
@@ -70,7 +72,7 @@ resolve mem = return . ($mem) . \case
    '"' -> sideEffect $ (\s -> putStr s >> return Empty) . map xEnum . toList
    ',' -> sideEffect $ \s -> flip push s . xEnum <$> getChar
    '@' -> sideEffect $ \s -> flip pushn s . map xEnum <$> getLine
-   err -> errorWithoutStackTrace ("Unknown command: " ++ [err])
+   err -> throw $ InvalidCommand err
    where
    
    xEnum :: (Enum a, Enum b) => a -> b
