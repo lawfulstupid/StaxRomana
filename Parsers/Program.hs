@@ -4,28 +4,33 @@ module StaxRomana.Parsers.Program where
 
 import StaxRomana.Data.Program
 import StaxRomana.Parsers.Roman
+import StaxRomana.Exception.Parse
 
 import AbLib.Control.Parser
 import AbLib.Control.ParserUtils
 
+import Control.Exception
 import Data.Maybe (catMaybes)
 import Data.Char (isSpace)
 
 instance Parse Program where
    parser = do
       prog <- many $ peek next >>= \case
-         '`' -> comment >> return Nothing
-         '(' -> Just <$> loopIf
-         '{' -> Just <$> loopWhile
-         '[' -> Just <$> loopRepeat
-         c | isRoman c -> Just <$> numeral
-           | isSpace c -> whitespace >> return Nothing
-         _   -> Just <$> command
+         '`' -> onFail (nada comment)     $ throw $ IncompleteComment
+         '(' -> onFail (just loopIf)      $ throw $ UnclosedLoop If
+         '{' -> onFail (just loopWhile)   $ throw $ UnclosedLoop While
+         '[' -> onFail (just loopRepeat)  $ throw $ UnclosedLoop Repeat
+         c | isRoman c -> onFail (just numeral) throwInvalidNumeral
+           | isSpace c -> nada whitespace
+         _   -> onFail (just command) throwUnopenedLoop
       return $ program $ catMaybes prog
       where
       
+      nada = (const Nothing <$>)
+      just = (Just <$>)
+      
       command :: Parser Command
-      command = Command <$> next
+      command = Command <$> matchIf (not . flip elem ")}]")
       
       isRoman :: Char -> Bool
       isRoman c = elem c "IVXLCDM"
@@ -63,3 +68,16 @@ instance Parse Program where
          s <- many $ matchIf $ not . (=='`')
          match '`'
          return s
+      
+      throwInvalidNumeral :: Parser a
+      throwInvalidNumeral = do
+         badnum <- greedy $ many $ matchIf isRoman
+         throw $ InvalidNumeral badnum
+      
+      throwUnopenedLoop :: Parser a
+      throwUnopenedLoop = do
+         c <- next
+         case c of
+            ')' -> throw $ UnopenedLoop If
+            '}' -> throw $ UnopenedLoop While
+            ']' -> throw $ UnopenedLoop Repeat
