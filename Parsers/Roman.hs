@@ -14,12 +14,12 @@ instance Parse Roman where
       x <- decem
       i <- unus
       let r = m + c + x + i
-      guard (r /= 0)
+      guard (r > 0)
       return r
       where
 
       roman :: Parser String -> Parser Roman
-      roman f = fmap (Roman . fromIntegral . length) f
+      roman f = Roman . fromIntegral . length <$> f
             
       milia :: Parser Roman
       milia = do
