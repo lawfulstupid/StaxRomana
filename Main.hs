@@ -33,9 +33,11 @@ runWithMemory prog !mem = do
    let h = head mem
    let (mcmd, prog') = nextCmd prog h
    case mcmd of
-      Nothing -> putStr "\nFinal Memory: " >> print mem
       Just (Numeral r) -> runWithMemory prog' (mem :< r)
       Just (Command c) -> resolve mem c >>= runWithMemory prog'
+      Nothing -> if null mem
+         then putStr "\n"
+         else putStr "\nFinal Memory: " >> print mem
 
 resolve :: Memory -> Char -> IO Memory
 resolve mem = return . ($mem) . \case
