@@ -1,7 +1,9 @@
-module StaxRomana.Data.Stack where
+module StaxRomana.Data.Stack (
+   module StaxRomana.Data.Stack,
+   module StaxRomana.Internal.Data
+) where
 
-
-data Stack a = Empty | Stack a :< a
+import StaxRomana.Internal.Data (Stack(..))
 
 
 instance Show a => Show (Stack a) where

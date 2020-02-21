@@ -1,16 +1,13 @@
 module StaxRomana.Data.Memory (
    module StaxRomana.Data.Memory,
+   module StaxRomana.Internal.Data,
    module StaxRomana.Data.Stack
 ) where
 
 import Prelude hiding (head)
-
-import StaxRomana.Data.Roman
+import StaxRomana.Internal.Data (Memory(..), Head(..))
 import StaxRomana.Data.Stack
-
-
-type Memory = Stack Roman
-type Head = Roman
+import StaxRomana.Data.Roman
 
 
 head :: Memory -> Head

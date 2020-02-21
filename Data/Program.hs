@@ -1,13 +1,11 @@
-module StaxRomana.Data.Program where
+module StaxRomana.Data.Program (
+   module StaxRomana.Data.Program,
+   module StaxRomana.Internal.Data
+) where
 
+import StaxRomana.Internal.Data (Program(..), Command(..), LoopType(..))
 import StaxRomana.Data.Memory (Head)
 import StaxRomana.Data.Roman
-
-
-data Program = Command :> Program | End
-data Command = Pass | Numeral Roman | Command Char | Loop LoopType Program
-data LoopType = If | While | Repeat
-   deriving (Eq, Show)
 
 
 instance Show Program where
