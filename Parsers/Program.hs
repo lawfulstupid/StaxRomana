@@ -22,7 +22,7 @@ instance Parse Program where
          '[' -> onFail (just loopRepeat)  $ throw $ UnclosedLoop Repeat
          c | isRoman c -> onFail (just numeral) throwInvalidNumeral
            | isSpace c -> nada whitespace
-         _   -> onFail (just command) throwUnopenedLoop
+         _   -> just command
       return $ program $ catMaybes prog
       where
       
@@ -73,11 +73,3 @@ instance Parse Program where
       throwInvalidNumeral = do
          badnum <- greedy $ many $ matchIf isRoman
          throw $ InvalidNumeral badnum
-      
-      throwUnopenedLoop :: Parser a
-      throwUnopenedLoop = do
-         c <- next
-         case c of
-            ')' -> throw $ UnopenedLoop If
-            '}' -> throw $ UnopenedLoop While
-            ']' -> throw $ UnopenedLoop Repeat
