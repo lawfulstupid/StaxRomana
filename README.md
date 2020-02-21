@@ -70,3 +70,5 @@ Stack head is treated as 0 when stack is empty.
 	?>{.$d;I+$?>}.?!(.)..	Pop 2, push sequence from 1st to 2nd (e.g. VX: ~> [5,6,7,8,9,10])
 ### Hello world
 	LXXII CI CVIII d CXI XLIV XXXII LXXXVII CXI CXIV CVIII C XXXIII "
+### Hello World but worse
+	VId*d+CIdVII+?$X+ddX/IV*$IIdddd****dLV+;;?III+$C$LXd+$-CXd¬¬d+-;"
