@@ -14,14 +14,41 @@ import AbLib.Control.Parser
 import AbLib.Data.Tuple
 
 import Control.Exception (throw)
-import Data.Functor ((<&>))
-import Data.List (intersperse, intercalate)
+import Data.List (intercalate)
 import GHC.IO (unsafePerformIO)
 import System.Environment (getArgs)
 
 
 main :: IO ()
-main = getArgs <&> concat >>= compile
+main = do
+   args <- getArgs
+   if length args == 0 then help else case args !! 0 of
+      "help" -> help
+      "eval" -> eval
+      "load" -> load
+      _      -> putStrLn ("Unrecognised command: " ++ args !! 0)
+
+help :: IO ()
+help = do
+   putStrLn "S T A X   R O M A N A"
+   putStrLn ""
+   putStrLn "You have two options:"
+   putStrLn "eval <code>\tEvaluate program at command line."
+   putStrLn "load <file>\tLoad a program from a file."
+   putStrLn ""
+   putStrLn "github.com/lawfulstupid/StaxRomana"
+
+eval :: IO ()
+eval = do
+   (_:args) <- getArgs
+   compile $ intercalate " " args
+
+load :: IO ()
+load = do
+   (_:args) <- getArgs
+   if length args == 0
+   then putStrLn "You need to supply a file to load!"
+   else readFile (args !! 0) >>= compile
 
 compile :: String -> IO ()
 compile = run . parse
