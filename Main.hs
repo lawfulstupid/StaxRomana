@@ -1,6 +1,6 @@
 {-# LANGUAGE BangPatterns, LambdaCase #-}
 
-module StaxRomana.Main where
+module Main where
 
 import Prelude hiding (head)
 
@@ -13,10 +13,11 @@ import StaxRomana.Exception.Runtime
 import AbLib.Control.Parser
 import AbLib.Data.Tuple
 
-import System.Environment (getArgs)
-import Data.Functor ((<&>))
-import GHC.IO (unsafePerformIO)
 import Control.Exception (throw)
+import Data.Functor ((<&>))
+import Data.List (intersperse, intercalate)
+import GHC.IO (unsafePerformIO)
+import System.Environment (getArgs)
 
 
 main :: IO ()
