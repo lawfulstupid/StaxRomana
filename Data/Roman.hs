@@ -1,5 +1,5 @@
 
-module StaxRomana.Roman where
+module StaxRomana.Data.Roman where
 
 import AbLib.Control.Parser
 import AbLib.Data.Tuple

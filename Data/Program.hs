@@ -1,10 +1,10 @@
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 
-module StaxRomana.Program where
+module StaxRomana.Data.Program where
 
-import StaxRomana.Memory (Head)
-import StaxRomana.Roman
+import StaxRomana.Data.Memory (Head)
+import StaxRomana.Data.Roman
 import AbLib.Control.Parser
 import AbLib.Control.ParserUtils
 import Data.Maybe (catMaybes)

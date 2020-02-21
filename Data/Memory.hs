@@ -1,11 +1,11 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module StaxRomana.Memory (
-   module StaxRomana.Memory, module StaxRomana.Roman
+module StaxRomana.Data.Memory (
+   module StaxRomana.Data.Memory, module StaxRomana.Data.Roman
 ) where
 
 import Prelude hiding (head)
-import StaxRomana.Roman
+import StaxRomana.Data.Roman
 
 
 type Memory = Stack Roman

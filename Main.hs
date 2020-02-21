@@ -3,8 +3,8 @@
 module StaxRomana.Main where
 
 import Prelude hiding (head)
-import StaxRomana.Program
-import StaxRomana.Memory
+import StaxRomana.Data.Program
+import StaxRomana.Data.Memory
 import AbLib.Control.Parser
 import System.Environment (getArgs)
 import Data.Functor ((<&>))
