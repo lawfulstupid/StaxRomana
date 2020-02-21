@@ -1,13 +1,13 @@
 {-# LANGUAGE LambdaCase #-}
 
-module StaxRomana.Data.Roman (
-   module StaxRomana.Data.Roman,
-   module StaxRomana.Internal.Data
-) where
+module StaxRomana.Data.Roman where
 
-import StaxRomana.Internal.Data (Roman(..))
 import AbLib.Data.Tuple
 import Data.Function ((&))
+
+
+data Roman = Roman {value :: Word}
+   deriving (Eq, Ord)
 
 
 instance Show Roman where
