@@ -70,6 +70,7 @@ resolve mem = return . ($mem) . \case
    '"' -> sideEffect $ (\s -> putStr s >> return Empty) . map xEnum . toList
    ',' -> sideEffect $ \s -> flip push s . xEnum <$> getChar
    '@' -> sideEffect $ \s -> flip pushn s . map xEnum <$> getLine
+   err -> errorWithoutStackTrace ("Unknown command: " ++ [err])
    where
    
    xEnum :: (Enum a, Enum b) => a -> b
