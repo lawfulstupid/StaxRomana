@@ -10,4 +10,4 @@ data RuntimeException
 instance Exception RuntimeException
 
 instance Show RuntimeException where
-   show (InvalidCommand c) = "Unknown command: " ++ [c]
+   show (InvalidCommand c) = "imperium ignotum: " ++ [c]

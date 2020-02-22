@@ -9,6 +9,7 @@ data RomanNumeralException
    = BadAddition Roman Roman
    | BadSubtraction Roman Roman
    | BadMultiplication Roman Roman
+   | BadDivision
    | ExceedsMaximum
    | ExceedsMinimum
 
@@ -16,8 +17,9 @@ instance Exception RomanNumeralException
 
 instance Show RomanNumeralException where
    show = \case
-      BadSubtraction x y      -> "Cannot subtract " ++ show y ++ " from " ++ show x
-      BadAddition x y         -> "Cannot add " ++ show y ++ " to " ++ show x
-      BadMultiplication x y   -> "Cannot multiply " ++ show x ++ " by " ++ show y
-      ExceedsMaximum          -> "Roman numerals cannot exceed " ++ show (maxBound :: Roman)
-      ExceedsMinimum          -> "Roman numerals cannot lie below " ++ show (minBound :: Roman)
+      BadAddition x y         -> "non potest addunt " ++ show x ++ " et " ++ show y
+      BadSubtraction x y      -> "non potest subtrahere " ++ show y ++ " ex " ++ show x
+      BadMultiplication x y   -> "non potest multiplicamini " ++ show x ++ " et " ++ show y
+      BadDivision             -> "non potest dividere per nulla"
+      ExceedsMaximum          -> "Romani numeralis non potest esse supra " ++ show (maxBound :: Roman)
+      ExceedsMinimum          -> "Romani numeralis non potest esse infra " ++ show (minBound :: Roman)

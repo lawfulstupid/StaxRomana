@@ -17,7 +17,7 @@ instance Exception ParseException
 
 instance Show ParseException where
    show = \case
-      IncompleteComment -> "Incomplete comment"
-      UnclosedLoop t    -> "Unclosed " ++ show t ++ " loop"
-      UnopenedLoop t    -> "No " ++ show t ++ " loop to close"
-      InvalidNumeral r  -> "Invalid Roman numeral: " ++ r
+      IncompleteComment -> "imperfecta nota"
+      UnclosedLoop t    -> "imperfecta repetitio ex " ++ show t
+      UnopenedLoop t    -> "nulla repetitio ex " ++ show t ++ " ad perficiendum"
+      InvalidNumeral r  -> "irritum Romani numeralis: " ++ r

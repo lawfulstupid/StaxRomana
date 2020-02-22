@@ -38,7 +38,7 @@ fromList :: [a] -> Stack a
 fromList xs = pushn xs Empty
 
 pop :: Stack a -> (a, Stack a)
-pop Empty  = errorWithoutStackTrace "Cannot pop an empty stack!"
+pop Empty  = errorWithoutStackTrace "non potest pop inani acervus"
 pop (s:<x) = (x, s)
 
 popn :: Int -> Stack a -> ([a], Stack a)

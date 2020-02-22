@@ -13,10 +13,10 @@ import StaxRomana.Exception.Runtime
 import AbLib.Control.Parser
 import AbLib.Data.Tuple
 
+import System.Environment (getArgs)
+import GHC.IO (unsafePerformIO)
 import Control.Exception (throw)
 import Data.List (intercalate)
-import GHC.IO (unsafePerformIO)
-import System.Environment (getArgs)
 
 
 main :: IO ()
@@ -26,7 +26,7 @@ main = do
       "help" -> help
       "eval" -> eval
       "load" -> load
-      _      -> putStrLn ("Unrecognised command: " ++ args !! 0)
+      _      -> putStrLn ("Unknown command: " ++ args !! 0)
 
 help :: IO ()
 help = do

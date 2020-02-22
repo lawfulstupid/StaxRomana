@@ -7,7 +7,13 @@ import StaxRomana.Data.Roman
 data Program = Command :> Program | End
 data Command = Pass | Numeral Roman | Command Char | Loop LoopType Program
 data LoopType = If | While | Repeat
-   deriving (Eq, Show)
+   deriving (Eq)
+
+
+instance Show LoopType where
+   show If = "si"
+   show While = "dum"
+   show Repeat = "repetere"
 
 
 instance Show Program where

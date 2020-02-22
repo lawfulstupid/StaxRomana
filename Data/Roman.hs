@@ -29,6 +29,8 @@ instance Enum Roman where
    fromEnum = fromEnum . toInteger
 
 instance Integral Roman where
+   quotRem _ 0 = throw BadDivision
    quotRem (Roman x) (Roman y) = Roman $# quotRem x y
+   divMod _ 0 = throw BadDivision
    divMod (Roman x) (Roman y) = Roman $# divMod x y
    toInteger (Roman x) = toInteger x
