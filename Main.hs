@@ -58,14 +58,14 @@ run = flip runWithMemory Empty
 
 runWithMemory :: Program -> Memory -> IO ()
 runWithMemory prog !mem = do
-   let h = head mem
+   let !h = head mem
    let (mcmd, prog') = nextCmd prog h
    case mcmd of
       Just (Numeral r) -> runWithMemory prog' (mem :< r)
       Just (Command c) -> resolve mem c >>= runWithMemory prog'
       Nothing -> if null mem
          then putStr "\n"
-         else putStr "\nFinal Memory: " >> print mem
+         else seq mem (putStr "\nFinal Memory: " >> print mem)
 
 resolve :: Memory -> Char -> IO Memory
 resolve mem = return . ($mem) . \case
