@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 module StaxRomana.Internal.Roman where
 
 import Data.Function ((&))

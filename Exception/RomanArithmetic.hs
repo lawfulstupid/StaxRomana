@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 module StaxRomana.Exception.RomanArithmetic where
 
 import StaxRomana.Internal.Roman
