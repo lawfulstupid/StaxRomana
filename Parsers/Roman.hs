@@ -14,33 +14,33 @@ instance Parse Roman where
       x <- decem
       i <- unus
       let r = m + c + x + i
-      guard (r > 0)
-      return r
+      guard (r > 0) -- if all parsers pass
+      return $ fromInteger r
       where
 
-      roman :: Parser String -> Parser Roman
-      roman f = Roman . fromIntegral . length <$> f
+      count :: Parser String -> Parser Integer
+      count f = fromIntegral . length <$> f
             
-      milia :: Parser Roman
+      milia :: Parser Integer
       milia = do
-         m <- roman $ between (0,3) $ match 'M'
+         m <- count $ between (0,3) $ match 'M'
          guard (m <= 3)
          return (1000 * m)
 
-      centum :: Parser Roman
+      centum :: Parser Integer
       centum = matchAs "CD" 400 <|> matchAs "CM" 900 <|> do
-         d <- roman $ between (0,1) $ match 'D'
-         c <- roman $ between (0,3) $ match 'C'
+         d <- count $ between (0,1) $ match 'D'
+         c <- count $ between (0,3) $ match 'C'
          return (500 * d + 100 * c)
 
-      decem :: Parser Roman
+      decem :: Parser Integer
       decem = matchAs "XL" 40 <|> matchAs "XC" 90 <|> do
-         l <- roman $ between (0,1) $ match 'L'
-         x <- roman $ between (0,3) $ match 'X'
+         l <- count $ between (0,1) $ match 'L'
+         x <- count $ between (0,3) $ match 'X'
          return (50 * l + 10 * x)
 
-      unus :: Parser Roman
+      unus :: Parser Integer
       unus = matchAs "IV" 4 <|> matchAs "IX" 9 <|> do
-         v <- roman $ between (0,1) $ match 'V'
-         i <- roman $ between (0,3) $ match 'I'
+         v <- count $ between (0,1) $ match 'V'
+         i <- count $ between (0,3) $ match 'I'
          return (5 * v + i)
