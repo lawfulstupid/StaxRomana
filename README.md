@@ -29,11 +29,13 @@ When the program terminates, it will output its final memory state unless empty.
 	_	Clear stack (pop all).
 ### Logic
 Treats zero as False, non-zero as True.
+
 	¬	Pop 1, push logical negation.
 	&	Pop 2, push conjunction.
 	|	Pop 2, push disjunction.
 ### Control
 Stack head is treated as 0 when stack is empty.
+
 	(...)	If statement: executes once if stack head is non-zero.
 	{...}	While loop: executes forever while stack head is non-zero.
 	[...]	Repeat loop: executes once, then repeats while stack head is non-zero.
